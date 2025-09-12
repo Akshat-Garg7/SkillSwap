@@ -1,0 +1,58 @@
+<!-- conversation-list.component.html -->
+<div class="conversation-list-container p-4">
+  <div class="header mb-4">
+    <h2 class="text-xl font-semibold">Messages</h2>
+  </div>
+
+  @if (conversations$ | async; as conversations) {
+    @if (conversations.length > 0) {
+      @for (convo of conversations; track convo._id) {
+        <a
+          [routerLink]="['/messages', convo._id]"
+          routerLinkActive="active"
+          class="conversation-item flex items-center gap-4 p-3 hover:bg-gray-100 rounded-md transition-colors duration-200"
+        >
+          <img
+            [src]="'/images/default-avatar.jpg'"
+            [alt]="convo.user.name"
+            class="avatar w-12 h-12 rounded-full object-cover"
+          />
+
+          <div class="convo-details flex-1">
+            <span class="username font-medium text-gray-900 block">{{ convo.user.name }}</span>
+            <p class="last-message text-sm text-gray-600">
+              @if (convo.lastMessage) {
+                {{ convo.lastMessage.content }}
+              } @else {
+                <span class="no-message-text italic text-gray-400">No messages yet.</span>
+              }
+            </p>
+          </div>
+
+          <div class="convo-meta text-right space-y-1">
+            @if (convo.lastMessage) {
+              <span class="timestamp text-xs text-gray-500 block">
+                {{ convo.lastMessage.createdAt }}
+              </span>
+            }
+            @if (convo.unreadCount > 0) {
+              <span
+                class="unread-badge inline-block min-w-[20px] px-2 py-0.5 text-xs text-white bg-red-500 rounded-full text-center"
+              >
+                {{ convo.unreadCount }}
+              </span>
+            }
+          </div>
+        </a>
+      }
+    } @else {
+      <div class="empty-state text-center text-gray-500 py-8">
+        <p>You have no conversations yet. Find a match to start chatting!</p>
+      </div>
+    }
+  }
+
+  <!-- <ng-template #loading>
+    <app-loading-spinner></app-loading-spinner>
+  </ng-template> -->
+</div>

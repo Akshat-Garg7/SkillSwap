@@ -1,0 +1,37 @@
+<nav class="bg-white shadow-md">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center py-4">
+
+      <!-- Logo -->
+      <a [routerLink]="'/'" class="text-2xl font-extrabold text-indigo-600 hover:text-indigo-700 transition">
+        SkillSwap 🤝
+      </a>
+
+      <!-- Authenticated Menu -->
+      @if (isLoggedIn) {
+        <div class="flex items-center space-x-6">
+
+          <div class="flex items-center space-x-3">
+            <a [routerLink]="'/profile'" class="font-semibold text-gray-700 hover:text-indigo-600 transition">
+              {{ userName }}
+            </a>
+            <button 
+              (click)="logout()" 
+              class="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm font-medium hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 transition">
+              Logout
+            </button>
+          </div>
+        </div>
+      } @else {
+        <!-- Guest Menu -->
+        <div class="flex items-center space-x-4">
+          <a [routerLink]="'/auth/login'" class="text-gray-600 hover:text-indigo-600 transition">Login</a>
+          <a [routerLink]="'/auth/register'" class="px-4 py-2 bg-indigo-600 text-white rounded-md font-medium hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 transition">
+            Sign Up
+          </a>
+        </div>
+      }
+
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,61 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="logo-section">
+      <h1 class="app-name">SkillSwap</h1>
+      <p class="tagline">Exchange skills, grow together</p>
+    </div>
+    
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <input 
+          type="email" 
+          formControlName="email"
+          placeholder="Email address"
+          class="form-input"
+          [class.error]="isFieldInvalid('email')"
+        >
+        <div class="error-message" *ngIf="isFieldInvalid('email')">
+          Please enter a valid email address
+        </div>
+      </div>
+      
+      <div class="input-group">
+        <input 
+          [type]="showPassword ? 'text' : 'password'"
+          formControlName="password"
+          placeholder="Password"
+          class="form-input"
+          [class.error]="isFieldInvalid('password')"
+        >
+        <button 
+          type="button" 
+          class="password-toggle"
+          (click)="togglePassword()"
+        >
+          <i class="material-icons">{{ showPassword ? 'visibility_off' : 'visibility' }}</i>
+        </button>
+        <div class="error-message" *ngIf="isFieldInvalid('password')">
+          Password is required
+        </div>
+      </div>
+      
+      <button 
+        type="submit" 
+        class="sign-in-btn"
+        [disabled]="loginForm.invalid || isLoading"
+      >
+        <span *ngIf="!isLoading">Sign In</span>
+        <div class="spinner" *ngIf="isLoading"></div>
+      </button>
+    </form>
+    
+    <div class="divider">
+      <span>or</span>
+    </div>
+    
+    <div class="auth-links">
+      <p (click)="navigateToRegister()">Don't have an account? Create account</p>
+      <!-- <a routerLink="/forgot-password" class="forgot-link">Forgot password?</a> -->
+    </div>
+  </div>
+</div>

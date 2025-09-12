@@ -1,0 +1,159 @@
+<div class="skill-list-container">
+   @if (loading) {
+    <div class="fixed inset-0 bg-white bg-opacity-70 flex items-center justify-center z-50">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+  }
+  <div class="page-header">
+    <div class="header-content">
+      <h1>Your Skills</h1>
+      <p>Manage the skills you offer and want to learn</p>
+    </div>
+    <button class="add-skill-btn" (click)="navigateToCreate()">
+      <i class="fas fa-plus"></i>
+      Add New Skill
+    </button>
+  </div>
+
+  @if (loading) {
+    <div class="loading-container">
+      <div class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+      <p>Loading your skills...</p>
+    </div>
+  }
+
+  @if (error && !loading) {
+    <div class="error-container">
+      <i class="fas fa-exclamation-circle"></i>
+      <p>{{ error }}</p>
+      <button class="retry-btn" (click)="loadSkills()">
+        <i class="fas fa-redo"></i>
+        Try Again
+      </button>
+    </div>
+  }
+
+  @if (!loading && !error) {
+    <div class="skills-content">
+      <div class="filters-section">
+        <div class="filter-group">
+          <div class="filter-tabs">
+            <button 
+              class="filter-tab"
+              [class.active]="activeFilter === 'all'"
+              (click)="onFilterChange('all')"
+            >
+              All Skills ({{ skills.length }})
+            </button>
+            <button 
+              class="filter-tab offered"
+              [class.active]="activeFilter === 'offered'"
+              (click)="onFilterChange('offered')"
+            >
+              <i class="fas fa-hand-holding-heart"></i>
+              Offered ({{ getOfferedCount() }})
+            </button>
+            <button 
+              class="filter-tab wanted"
+              [class.active]="activeFilter === 'wanted'"
+              (click)="onFilterChange('wanted')"
+            >
+              <i class="fas fa-graduation-cap"></i>
+              Wanted ({{ getWantedCount() }})
+            </button>
+          </div>
+        </div>
+
+        <div class="advanced-filters">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input
+              type="text"
+              placeholder="Search skills..."
+              [(ngModel)]="searchQuery"
+              (input)="onSearchChange()"
+            >
+          </div>
+
+          <select 
+            class="filter-select"
+            [(ngModel)]="selectedCategory"
+            (change)="onCategoryChange()"
+          >
+            <option value="">All Categories</option>
+            @for (category of categories; track category) {
+              <option [value]="category">{{ category }}</option>
+            }
+          </select>
+
+          <select 
+            class="filter-select"
+            [(ngModel)]="selectedLevel"
+            (change)="onLevelChange()"
+          >
+            <option value="">All Levels</option>
+            @for (level of levels; track level) {
+              <option [value]="level">{{ level }}</option>
+            }
+          </select>
+
+          @if (searchQuery || selectedCategory || selectedLevel || activeFilter !== 'all') {
+            <button 
+              class="clear-filters-btn"
+              (click)="clearFilters()"
+            >
+              <i class="fas fa-times"></i>
+              Clear
+            </button>
+          }
+        </div>
+      </div>
+
+      @if (filteredSkills.length !== skills.length) {
+        <div class="results-info">
+          Showing {{ filteredSkills.length }} of {{ skills.length }} skills
+        </div>
+      }
+
+      @if (filteredSkills.length > 0) {
+        <div class="skills-grid">
+          @for (skill of filteredSkills; track skill._id) {
+            
+              <app-skill-card
+                [skill]="skill"
+                [showActions]="true"
+                (edit)="navigateToEdit($event)"
+                (delete)="deleteSkill($event)"
+              ></app-skill-card>
+           
+          }
+        </div>
+      }
+      
+      @if (filteredSkills.length === 0 && skills.length > 0) {
+        <div class="empty-state">
+          <i class="fas fa-search"></i>
+          <h3>No skills found</h3>
+          <p>Try adjusting your filters or search terms</p>
+          <button class="clear-filters-btn" (click)="clearFilters()">
+            Clear All Filters
+          </button>
+        </div>
+      }
+
+      @if (skills.length === 0) {
+        <div class="empty-state">
+          <i class="fas fa-plus-circle"></i>
+          <h3>No skills yet</h3>
+          <p>Start building your skill profile to connect with others</p>
+          <button class="add-skill-btn" (click)="navigateToCreate()">
+            <i class="fas fa-plus"></i>
+            Add Your First Skill
+          </button>
+        </div>
+      }
+    </div>
+  }
+</div>

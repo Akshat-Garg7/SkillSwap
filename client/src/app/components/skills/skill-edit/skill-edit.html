@@ -1,0 +1,341 @@
+<div class="skill-edit-container">
+  @if (loadingSkill) {
+    <div class="loading-container">
+      <div class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+      <p>Loading skill...</p>
+    </div>
+  }
+
+  @if (error && !loadingSkill && !originalSkill) {
+    <div class="error-container">
+      <i class="fas fa-exclamation-circle"></i>
+      <p>{{ error }}</p>
+      <button class="retry-btn" (click)="loadSkill()">
+        <i class="fas fa-redo"></i>
+        Try Again
+      </button>
+    </div>
+  }
+
+  @if (!loadingSkill && originalSkill) {
+    <div class="edit-content">
+      <div class="page-header">
+        <button class="back-btn" (click)="goBack()">
+          <i class="fas fa-arrow-left"></i>
+          Back to Skills
+        </button>
+        <div class="header-content">
+          <h1>Edit Skill</h1>
+          <p>Update your skill information</p>
+        </div>
+        <div class="header-actions">
+          <button 
+            class="reset-btn" 
+            (click)="resetForm()" 
+            [disabled]="loading || !hasChanges()"
+            name="Reset to original values"
+          >
+            <i class="fas fa-undo"></i>
+            Reset
+          </button>
+          <button 
+            class="delete-btn" 
+            (click)="ondeleteSkill()" 
+            [disabled]="loading"
+            name="Delete this skill"
+          >
+            <i class="fas fa-trash"></i>
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <form [formGroup]="skillForm" (ngSubmit)="onSubmit()" class="skill-form">
+          
+          <div class="form-section">
+  <h3>What would you like to do?</h3>
+  <div class="type-selection">
+    @for (skillType of skillTypes; track skillType.value) {
+      <div 
+        class="type-option"
+        
+        [class.selected]="skillForm.get('isOffered')?.value === skillType.value"
+        
+        (click)="skillForm.patchValue({isOffered: skillType.value})"
+      >
+        <div class="type-icon" [style.background-color]="skillType.color">
+          <i class="fas" [ngClass]="skillType.icon"></i>
+        </div>
+        <div class="type-content">
+          <h4>{{ skillType.label }}</h4>
+          <p>{{ skillType.value === true ? 'Share your expertise with others' : 'Learn something new from the community' }}</p>
+        </div>
+        <div class="type-radio">
+          <input 
+            type="radio" 
+            
+            [value]="skillType.value" 
+            
+            formControlName="isOffered"
+            [id]="'isOffered-' + skillType.value"
+          >
+          </div>
+      </div>
+    }
+  </div>
+</div>
+
+          <div class="form-section">
+            <h3>Basic Information</h3>
+            
+            <div class="form-group">
+              <label for="name">Skill name *</label>
+              <input
+                type="text"
+                id="name"
+                formControlName="name"
+                class="form-input"
+                [class.invalid]="name?.invalid && name?.touched"
+                placeholder="e.g., Guitar Basics, Web Development, Italian Cooking"
+              >
+              <div class="input-help">
+                <span class="char-count">{{ name?.value?.length || 0 }}/100</span>
+              </div>
+              @if (name?.invalid && name?.touched) {
+                <div class="error-message">
+                  @if (name?.errors?.['required']) {
+                    <span>name is required</span>
+                  }
+                  @if (name?.errors?.['minlength']) {
+                    <span>name must be at least 3 characters</span>
+                  }
+                  @if (name?.errors?.['maxlength']) {
+                    <span>name cannot exceed 100 characters</span>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="description">Description *</label>
+              <textarea
+                id="description"
+                formControlName="description"
+                class="form-input textarea"
+                [class.invalid]="description?.invalid && description?.touched"
+                placeholder="Describe what you'll teach/learn, what makes it special, and what students can expect..."
+                rows="4"
+              ></textarea>
+              <div class="input-help">
+                <span class="char-count">{{ getDescriptionCharCount() }}/1000</span>
+              </div>
+              @if (description?.invalid && description?.touched) {
+                <div class="error-message">
+                  @if (description?.errors?.['required']) {
+                    <span>Description is required</span>
+                  }
+                  @if (description?.errors?.['minlength']) {
+                    <span>Description must be at least 10 characters</span>
+                  }
+                  @if (description?.errors?.['maxlength']) {
+                    <span>Description cannot exceed 1000 characters</span>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="category">Category *</label>
+              <select
+                id="category"
+                formControlName="category"
+                class="form-input"
+                [class.invalid]="category?.invalid && category?.touched"
+              >
+                <option value="">Select a category</option>
+                @for (cat of categories; track cat) {
+                  <option [value]="cat">{{ cat }}</option>
+                }
+              </select>
+              @if (category?.invalid && category?.touched) {
+                <div class="error-message">
+                  @if (category?.errors?.['required']) {
+                    <span>Please select a category</span>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3>Skill Details</h3>
+            
+            <div class="form-group">
+              <label for="level">Skill Level *</label>
+              <select
+                id="level"
+                formControlName="level"
+                class="form-input"
+                [class.invalid]="level?.invalid && level?.touched"
+                (change)="onLevelChange()"
+              >
+                <option value="">Select skill level</option>
+                @for (lvl of levels; track lvl.value) {
+                  <option [value]="lvl.value">
+                    {{ lvl.value }} - {{ lvl.description }}
+                  </option>
+                }
+              </select>
+              @if (getSelectedLevelInfo()) {
+                <div class="input-help">
+                  <i class="fas fa-info-circle"></i>
+                  {{ getSelectedLevelInfo()?.description }}
+                </div>
+              }
+              @if (level?.invalid && level?.touched) {
+                <div class="error-message">
+                  @if (level?.errors?.['required']) {
+                    <span>Please select a skill level</span>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="duration">Session Duration (minutes)</label>
+              <input
+                type="number"
+                id="duration"
+                formControlName="duration"
+                class="form-input"
+                [class.invalid]="duration?.invalid && duration?.touched"
+                placeholder="60"
+                min="15"
+                max="480"
+              >
+              <div class="input-help">
+                <i class="fas fa-clock"></i>
+                Recommended: 30-120 minutes per session
+              </div>
+              @if (duration?.invalid && duration?.touched) {
+                <div class="error-message">
+                  @if (duration?.errors?.['min']) {
+                    <span>Minimum duration is 15 minutes</span>
+                  }
+                  @if (duration?.errors?.['max']) {
+                    <span>Maximum duration is 8 hours (480 minutes)</span>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3>Additional Information</h3>
+            
+            <div class="form-group">
+              <label for="tags">Tags (Optional)</label>
+              <input
+                type="text"
+                id="tags"
+                formControlName="tags"
+                class="form-input"
+                placeholder="web development, javascript, react (comma-separated)"
+              >
+              <div class="input-help">
+                <i class="fas fa-tags"></i>
+                Add up to 10 comma-separated tags. Tags: {{ getTagCount() }}/10
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="checkbox-group">
+                <input
+                  type="checkbox"
+                  id="isActive"
+                  formControlName="isActive"
+                  class="checkbox-input"
+                >
+                <label for="isActive" class="checkbox-label">
+                  <span class="checkbox-custom"></span>
+                  <span class="checkbox-text">
+                    <strong>Active Skill</strong>
+                    <small>Make this skill visible to others for matching</small>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          @if (error) {
+            <div class="error-message global-error">
+              <i class="fas fa-exclamation-circle"></i>
+              <span>{{ error }}</span>
+            </div>
+          }
+
+          <div class="form-actions">
+            <button 
+              type="button" 
+              class="cancel-btn"
+              (click)="goBack()"
+              [disabled]="loading"
+            >
+              Cancel
+            </button>
+            
+            <div class="primary-actions">
+              @if (hasChanges()) {
+                <button 
+                  type="button" 
+                  class="reset-form-btn"
+                  (click)="resetForm()" 
+                  [disabled]="loading || !hasChanges()"
+                >
+                  <i class="fas fa-undo"></i>
+                  Reset Changes
+                </button>
+              }
+              
+              <button 
+                type="submit" 
+                class="submit-btn"
+                [disabled]="loading || skillForm.invalid || !hasChanges()"
+              >
+                @if (!loading) {
+                  <span>
+                    <i class="fas fa-save"></i>
+                    Save Changes
+                  </span>
+                }
+                @if (loading) {
+                  <span>
+                    <i class="fas fa-spinner fa-spin"></i>
+                    Updating Skill...
+                  </span>
+                }
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      @if (hasChanges()) {
+        <div class="changes-indicator">
+          <div class="changes-content">
+            <i class="fas fa-info-circle"></i>
+            <span>You have unsaved changes</span>
+            <div class="changes-actions">
+              <button class="save-changes-btn" (click)="onSubmit()" [disabled]="loading || skillForm.invalid">
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

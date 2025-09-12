@@ -1,0 +1,191 @@
+/* This is standard CSS, converted from the original SCSS.
+
+.match-finder-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f9fafb;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.match-finder-container h2 {
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.match-finder-container p {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.match-finder-container .skill-select-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.match-finder-container .skill-select-container label {
+  font-weight: 600;
+  color: #374151;
+}
+
+.match-finder-container .skill-select-container select {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  min-width: 300px;
+  appearance: none;
+}
+
+.match-finder-container .loading-spinner {
+  text-align: center;
+  padding: 2rem;
+  color: #4b5563;
+  font-style: italic;
+}
+
+.match-finder-container .error-message {
+  text-align: center;
+  color: #ef4444;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.match-finder-container .no-matches-found {
+  text-align: center;
+  font-style: italic;
+  color: #9ca3af;
+  padding: 2rem 0;
+}
+
+.match-finder-container .matches-list-container h3 {
+  font-size: 1.5rem;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.match-finder-container .matches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.match-finder-container .match-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.match-finder-container .match-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.match-finder-container .match-card .user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.match-finder-container .match-card .user-info .profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e5e7eb;
+}
+
+.match-finder-container .match-card .user-info .user-details {
+  margin-top: 0.5rem;
+}
+
+.match-finder-container .match-card .user-info .user-details h4 {
+  font-size: 1.25rem;
+  margin: 0;
+  color: #1f2937;
+}
+
+.match-finder-container .match-card .user-info .user-details .location {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.match-finder-container .match-card .skill-info {
+  margin-bottom: 1.5rem;
+}
+
+.match-finder-container .match-card .skill-info .skill-type {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.match-finder-container .match-card .skill-info .skill-type.offer {
+  background-color: #10b981;
+}
+
+.match-finder-container .match-card .skill-info .skill-type.want {
+  background-color: #3b82f6;
+}
+
+.match-finder-container .match-card .skill-info .skill-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0;
+}
+
+.match-finder-container .match-card .skill-info .skill-category {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  margin: 0.25rem 0 0;
+}
+
+.match-finder-container .match-card .match-score {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #10b981;
+  margin-bottom: 1.5rem;
+}
+
+.match-finder-container .match-card .match-score span {
+  display: block;
+  font-size: 2.25rem;
+  font-weight: 800;
+}
+
+.match-finder-container .match-card .connect-button {
+  background-color: #4f46e5;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.match-finder-container .match-card .connect-button:hover {
+  background-color: #4338ca;
+} */

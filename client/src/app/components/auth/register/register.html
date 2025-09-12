@@ -1,0 +1,182 @@
+<div class="register-container">
+  <div class="register-card">
+    <div class="register-header">
+      <h1>Join SkillSwap</h1>
+      <p>Create your account and start exchanging skills</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-input"
+          [class.invalid]="name?.invalid && name?.touched"
+          placeholder="Enter your full name"
+        >
+        @if (name?.invalid && name?.touched) {
+          <div class="error-message">
+            @if (name?.errors?.['required']) {
+              <span>Name is required</span>
+            }
+            @if (name?.errors?.['minlength']) {
+              <span>Name must be at least 2 characters</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-input"
+          [class.invalid]="email?.invalid && email?.touched"
+          placeholder="Enter your email"
+        >
+        @if (email?.invalid && email?.touched) {
+          <div class="error-message">
+            @if (email?.errors?.['required']) {
+              <span>Email is required</span>
+            }
+            @if (email?.errors?.['email']) {
+              <span>Please enter a valid email</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="password-input-wrapper">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            formControlName="password"
+            class="form-input"
+            [class.invalid]="password?.invalid && password?.touched"
+            placeholder="Enter your password"
+          >
+          <button
+            type="button"
+            class="password-toggle"
+            (click)="togglePasswordVisibility('password')"
+          >
+            <i class="fas" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
+          </button>
+        </div>
+        @if (password?.invalid && password?.touched) {
+          <div class="error-message">
+            @if (password?.errors?.['required']) {
+              <span>Password is required</span>
+            }
+            @if (password?.errors?.['minlength']) {
+              <span>Password must be at least 6 characters</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="password-input-wrapper">
+          <input
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            class="form-input"
+            [class.invalid]="(confirmPassword?.invalid && confirmPassword?.touched) || (registerForm.errors?.['passwordMismatch'] && confirmPassword?.touched)"
+            placeholder="Confirm your password"
+          >
+          <button
+            type="button"
+            class="password-toggle"
+            (click)="togglePasswordVisibility('confirmPassword')"
+          >
+            <i class="fas" [class.fa-eye]="!showConfirmPassword" [class.fa-eye-slash]="showConfirmPassword"></i>
+          </button>
+        </div>
+        @if (confirmPassword?.invalid && confirmPassword?.touched) {
+          <div class="error-message">
+            @if (confirmPassword?.errors?.['required']) {
+              <span>Please confirm your password</span>
+            }
+          </div>
+        }
+        @if (registerForm.errors?.['passwordMismatch'] && confirmPassword?.touched) {
+          <div class="error-message">
+            <span>Passwords do not match</span>
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="bio">Bio (Optional)</label>
+        <textarea
+          id="bio"
+          formControlName="bio"
+          class="form-input textarea"
+          [class.invalid]="bio?.invalid && bio?.touched"
+          placeholder="Tell others about yourself and your interests"
+          rows="3"
+        ></textarea>
+        <div class="character-count">
+          {{ bio?.value?.length || 0 }}/500
+        </div>
+        @if (bio?.invalid && bio?.touched) {
+          <div class="error-message">
+            @if (bio?.errors?.['maxlength']) {
+              <span>Bio cannot exceed 500 characters</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location (Optional)</label>
+        <input
+          type="text"
+          id="location"
+          formControlName="location"
+          class="form-input"
+          placeholder="e.g., New York, NY"
+        >
+      </div>
+
+      @if (error) {
+        <div class="error-message global-error">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>{{ error }}</span>
+        </div>
+      }
+
+      <button
+        type="submit"
+        class="register-btn"
+        [disabled]="loading || registerForm.invalid"
+      >
+        @if (!loading) {
+          <span>Create Account</span>
+        } @else {
+          <span>
+            <i class="fas fa-spinner fa-spin"></i>
+            Creating Account...
+          </span>
+        }
+      </button>
+    </form>
+
+    <div class="register-footer">
+      <p>
+        Already have an account?
+        <button type="button" class="link-btn" (click)="navigateToLogin()">
+          Sign in here
+        </button>
+      </p>
+    </div>
+  </div>
+</div>

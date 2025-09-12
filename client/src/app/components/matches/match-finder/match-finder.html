@@ -1,0 +1,75 @@
+<div class="max-w-4xl mx-auto p-8 bg-gray-50 rounded-xl shadow-lg">
+   @if (loadingMatches && loadingSkills) {
+    <div class="fixed inset-0 bg-white bg-opacity-70 flex items-center justify-center z-50">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+  }
+  <!-- Heading -->
+  <h2 class="text-center text-2xl font-bold text-gray-800 mb-2">
+    Find New Skill Swaps
+  </h2>
+  <p class="text-center text-gray-500 mb-8">
+    Select one of your skills to find potential exchange partners.
+  </p>
+
+  <!-- Skill Select -->
+  <div class="flex items-center justify-center gap-4 mb-8">
+    <label for="skill-select" class="font-semibold text-gray-700">
+      Your Skill:
+    </label>
+    <select
+      id="skill-select"
+      [(ngModel)]="selectedSkillId"
+      (ngModelChange)="onSkillSelected($event)"
+      class="px-4 py-3 rounded-lg border border-gray-300 bg-white text-base cursor-pointer min-w-[300px]"
+    >
+      <option [value]="null" disabled>-- Select a skill --</option>
+      @if (userSkills.length > 0) {
+        @for (skill of userSkills; track skill._id) {
+          <option [ngValue]="skill._id">
+            {{ skill.name }} ({{ skill.isOffered ? 'I can teach' : 'I want to learn' }})
+          </option>
+        }
+      }
+    </select>
+  </div>
+
+  <!-- Error -->
+  @if (error) {
+    <div class="text-center text-red-500 font-medium mt-4">
+      {{ error }}
+    </div>
+  }
+
+  <!-- Matches List -->
+  @if (selectedSkillId && !loadingMatches) {
+    <div class="mt-8">
+      <h3 class="text-xl font-semibold text-gray-800 mb-6 text-center">
+        Potential Matches
+      </h3>
+
+      @if (potentialMatches.length > 0) {
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          @for (match of potentialMatches; track match._id) {
+            <app-match-card
+              [potentialMatch]="match"
+              [currentUserId]="currentUser?._id"
+              (createMatchRequest)="createMatchRequest($event)"
+            ></app-match-card>
+          }
+        </div>
+      } @else {
+        <p class="text-center italic text-gray-400 py-8">
+          No potential matches found for this skill.
+        </p>
+      }
+    </div>
+  }
+
+  <!-- Loading -->
+  @if (loadingMatches) {
+    <div class="text-center py-8 text-gray-600 italic">
+      Finding matches...
+    </div>
+  }
+</div>

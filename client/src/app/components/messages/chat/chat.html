@@ -1,0 +1,35 @@
+<div class="chat-container flex flex-col h-full border border-gray-200 rounded-md shadow-sm">
+  <!-- Header -->
+  <div class="chat-header px-4 py-3 border-b border-gray-200 bg-white">
+    <h3 class="text-lg font-semibold text-gray-800">Conversation</h3>
+  </div>
+
+  <!-- Message Area -->
+  <div class="message-area flex-1 overflow-y-auto px-4 py-3 space-y-2 bg-gray-50" #messageContainer>
+    @for (msg of messages; track msg._id) {
+      <app-message-item
+        [message]="msg"
+        [currentUserId]="currentUserId">
+      </app-message-item>
+    }
+  </div>
+
+  <!-- Message Input Area -->
+  <div class="message-input-area px-4 py-3 border-t border-gray-200 bg-white">
+    <form [formGroup]="messageForm" (ngSubmit)="sendMessage()" class="flex items-center gap-2">
+      <input
+        type="text"
+        formControlName="content"
+        placeholder="Type a message..."
+        class="message-input flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <button
+        type="submit"
+        [disabled]="messageForm.invalid"
+        class="send-button bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 disabled:opacity-50"
+      >
+        Send
+      </button>
+    </form>
+  </div>
+</div>

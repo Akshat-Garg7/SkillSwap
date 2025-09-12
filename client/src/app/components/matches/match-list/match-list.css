@@ -1,0 +1,71 @@
+/* This is standard CSS, converted from the original SCSS.
+
+.match-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f9fafb;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.match-list-container h2 {
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.match-list-container p {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.match-list-container .filter-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.match-list-container .filter-controls button {
+  background-color: #e5e7eb;
+  color: #4b5563;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.match-list-container .filter-controls button:hover {
+  background-color: #d1d5db;
+}
+
+.match-list-container .filter-controls button.active {
+  background-color: #4f46e5;
+  color: #ffffff;
+}
+
+.match-list-container .loading-spinner,
+.match-list-container .error-message,
+.match-list-container .no-matches-found {
+  text-align: center;
+  padding: 2rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.match-list-container .no-matches-found a {
+  color: #4f46e5;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.match-list-container .matches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+} */

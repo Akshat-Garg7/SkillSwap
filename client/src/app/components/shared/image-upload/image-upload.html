@@ -1,0 +1,29 @@
+<div class="flex flex-col items-center">
+  <!-- Avatar preview -->
+  <div class="w-32 h-32 rounded-full bg-gray-100 mb-4 overflow-hidden flex items-center justify-center border border-gray-200">
+    <img 
+      [src]="imagePreview || 'assets/images/default-avatar.png'" 
+      alt="Profile preview" 
+      class="w-full h-full object-cover"
+    >
+  </div>
+
+  <!-- Hidden file input -->
+  <input 
+    type="file" 
+    accept="image/*"
+    class="hidden" 
+    (change)="onFileSelected($event)" 
+    #fileInput
+  >
+
+  <!-- Choose button -->
+  <button
+    type="button"
+    (click)="fileInput.click()"
+    class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 
+           bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+  >
+    Choose Photo
+  </button>
+</div>

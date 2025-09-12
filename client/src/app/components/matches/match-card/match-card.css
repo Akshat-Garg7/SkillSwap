@@ -1,0 +1,150 @@
+/* .match-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+}
+
+.match-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.match-card .header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.match-card .user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.match-card .user-info img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e5e7eb;
+  margin-bottom: 0.75rem;
+  background-color: #f3f4f6;
+}
+
+.match-card .user-info h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+}
+
+.match-card .match-score {
+  background: #10b981;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-top: 0.5rem;
+  display: inline-block;
+}
+
+.match-card .content {
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.match-card .skill-info {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.match-card .skill-label {
+  font-weight: 600;
+  margin-right: 0.25rem;
+}
+
+.match-card .offer-label {
+  color: #10b981;
+}
+
+.match-card .want-label {
+  color: #3b82f6;
+}
+
+.match-card .actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.match-card .accept-btn,
+.match-card .reject-btn,
+.match-card .message-btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.match-card .accept-btn {
+  background: #10b981;
+  color: white;
+}
+.match-card .accept-btn:hover {
+  background: #059669;
+}
+
+.match-card .reject-btn {
+  background: #ef4444;
+  color: white;
+}
+.match-card .reject-btn:hover {
+  background: #dc2626;
+}
+
+.match-card .message-btn {
+  background: #4f46e5;
+  color: white;
+  margin-top: 1rem;
+}
+.match-card .message-btn:hover {
+  background: #4338ca;
+}
+
+.match-card .status-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.match-card .status-badge.accepted {
+  background: #d1fae5;
+  color: #065f46;
+}
+.match-card .status-badge.rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.match-card .status-badge.pending {
+  background: #fef3c7;
+  color: #92400e;
+} */

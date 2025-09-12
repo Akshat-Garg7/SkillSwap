@@ -1,0 +1,52 @@
+<div class="flex mb-4" 
+     [ngClass]="{ 
+       'justify-end': isSentByCurrentUser(), 
+       'justify-start': !isSentByCurrentUser() 
+     }">
+  
+  <!-- Avatar for received messages (left side) -->
+  @if (!isSentByCurrentUser()) {
+    <img [src]="message.sender.profilePicture || '/images/default-avatar.jpg'" 
+         [alt]="message.sender.name" 
+         class="w-8 h-8 rounded-full mr-3 flex-shrink-0 object-cover">
+  }
+  
+  <!-- Message bubble -->
+  <div class="max-w-xs lg:max-w-md xl:max-w-lg"
+       [ngClass]="{ 
+         'order-1': isSentByCurrentUser(), 
+         'order-2': !isSentByCurrentUser() 
+       }">
+    
+    <div class="px-4 py-2 rounded-2xl shadow-sm"
+         [ngClass]="{ 
+           'bg-blue-500 text-white rounded-br-md': isSentByCurrentUser(),
+           'bg-gray-100 text-gray-800 rounded-bl-md': !isSentByCurrentUser()
+         }">
+      
+      <!-- Sender name for received messages -->
+      @if (!isSentByCurrentUser()) {
+        <p class="text-xs font-medium text-gray-600 mb-1">{{ message.sender.name }}</p>
+      }
+      
+      <!-- Message content -->
+      <p class="text-sm leading-relaxed break-words">{{ message.content }}</p>
+      
+      <!-- Timestamp -->
+      <span class="text-xs mt-1 block"
+            [ngClass]="{ 
+              'text-blue-100': isSentByCurrentUser(),
+              'text-gray-500': !isSentByCurrentUser()
+            }">
+        {{ message.createdAt | date:'shortTime' }}
+      </span>
+    </div>
+  </div>
+  
+  <!-- Avatar for sent messages (right side) -->
+  @if (isSentByCurrentUser()) {
+    <img [src]="message.sender.profilePicture || '/images/default-avatar.jpg'" 
+         [alt]="message.sender.name" 
+         class="w-8 h-8 rounded-full ml-3 flex-shrink-0 object-cover order-2">
+  }
+</div>

@@ -1,0 +1,15 @@
+<div class="flex items-center" (mouseleave)="resetHover()">
+  @for (star of stars; let i = $index; track i) {
+    <span 
+      class="cursor-pointer text-3xl transition-colors duration-200"
+      (click)="rate(i + 1)"
+      (mouseenter)="hover(i + 1)"
+    >
+      @if ((hoverRating || rating) > i) {
+        ★
+      } @else {
+        ☆
+      }
+    </span>
+  }
+</div>

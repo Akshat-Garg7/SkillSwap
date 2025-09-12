@@ -1,0 +1,308 @@
+/* This is standard CSS, converted from the original SCSS. */
+
+.skill-list-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.page-header .header-content h1 {
+  color: #2d3748;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.page-header .header-content p {
+  color: #718096;
+  font-size: 18px;
+  margin: 0;
+}
+
+.page-header .add-skill-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.page-header .add-skill-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.loading-container,
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  text-align: center;
+}
+
+.loading-container .loading-spinner,
+.error-container .loading-spinner {
+  font-size: 48px;
+  color: #667eea;
+  margin-bottom: 16px;
+}
+
+.loading-container p,
+.error-container p {
+  color: #718096;
+  font-size: 18px;
+  margin: 0;
+}
+
+.loading-container .retry-btn,
+.error-container .retry-btn {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.loading-container .retry-btn:hover,
+.error-container .retry-btn:hover {
+  background: #5a67d8;
+}
+
+.filters-section {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f1f5f9;
+}
+
+.filters-section .filter-group {
+  margin-bottom: 20px;
+}
+
+.filters-section .filter-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filters-section .filter-tabs .filter-tab {
+  padding: 12px 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  color: #4a5568;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filters-section .filter-tabs .filter-tab:hover {
+  border-color: #cbd5e0;
+}
+
+.filters-section .filter-tabs .filter-tab.active {
+  border-color: #667eea;
+  background: #667eea;
+  color: white;
+}
+
+.filters-section .filter-tabs .filter-tab.offered.active {
+  border-color: #10b981;
+  background: #10b981;
+}
+
+.filters-section .filter-tabs .filter-tab.wanted.active {
+  border-color: #3b82f6;
+  background: #3b82f6;
+}
+
+.filters-section .advanced-filters {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filters-section .advanced-filters .search-box {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+
+.filters-section .advanced-filters .search-box i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #718096;
+}
+
+.filters-section .advanced-filters .search-box input {
+  width: 100%;
+  padding: 12px 16px 12px 40px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.filters-section .advanced-filters .search-box input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.filters-section .advanced-filters .filter-select {
+  padding: 12px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  background: white;
+}
+
+.filters-section .advanced-filters .filter-select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.filters-section .advanced-filters .clear-filters-btn {
+  background: #f7fafc;
+  color: #4a5568;
+  border: 1px solid #e2e8f0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.filters-section .advanced-filters .clear-filters-btn:hover {
+  background: #edf2f7;
+}
+
+.results-info {
+  color: #718096;
+  font-size: 14px;
+  margin-bottom: 16px;
+  padding: 0 4px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-state i {
+  font-size: 64px;
+  color: #cbd5e0;
+  margin-bottom: 16px;
+}
+
+.empty-state h3 {
+  color: #4a5568;
+  margin: 0 0 8px 0;
+  font-size: 24px;
+}
+
+.empty-state p {
+  color: #718096;
+  margin: 0 0 24px 0;
+  font-size: 16px;
+}
+
+.empty-state .add-skill-btn,
+.empty-state .clear-filters-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.empty-state .add-skill-btn:hover,
+.empty-state .clear-filters-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+@media (max-width: 768px) {
+  .skill-list-container {
+    padding: 16px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .page-header .add-skill-btn {
+    justify-content: center;
+  }
+
+  .filters-section .advanced-filters {
+    flex-direction: column;
+  }
+
+  .filters-section .advanced-filters .search-box {
+    min-width: unset;
+  }
+
+  .filters-section .advanced-filters .filter-select {
+    width: 100%;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filters-section .filter-tabs {
+    flex-direction: column;
+  }
+
+  .filters-section .filter-tabs .filter-tab {
+    justify-content: center;
+  }
+}

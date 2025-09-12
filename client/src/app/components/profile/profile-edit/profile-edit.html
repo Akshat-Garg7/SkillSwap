@@ -1,0 +1,62 @@
+<div class="edit-profile-container max-w-xl mx-auto p-6 bg-white rounded-2xl shadow-lg space-y-6">
+  <h2 class="text-2xl font-semibold text-gray-800">Edit Profile</h2>
+
+  <!-- Profile Picture Upload -->
+<div class="picture-upload flex flex-col items-center gap-4">
+  <app-image-upload
+      [currentImage]="currentUser.profilePictureUrl" (imageSelected)="onImageSelected($event)"> </app-image-upload>
+
+    <button
+      mat-stroked-button
+      color="accent"
+      (click)="uploadPicture()"
+      [disabled]="!selectedFile"
+    >
+      Upload Picture
+    </button>
+  </div>
+
+  <!-- Profile Edit Form -->
+  <form
+    [formGroup]="profileForm"
+    (ngSubmit)="onSubmit()"
+    class="space-y-5"
+  >
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Name</mat-label>
+      <input matInput id="name" type="text" formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Location</mat-label>
+      <input matInput id="location" type="text" formControlName="location" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>About Me</mat-label>
+      <textarea
+        matInput
+        id="bio"
+        formControlName="bio"
+        rows="5"
+      ></textarea>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="w-full py-2"
+      [disabled]="profileForm.invalid"
+    >
+      Save Changes
+    </button>
+  </form>
+
+  <!-- Feedback message -->
+  @if (feedbackMessage) {
+    <p class="feedback text-green-600 font-medium text-center mt-4">
+      {{ feedbackMessage }}
+    </p>
+  }
+</div>

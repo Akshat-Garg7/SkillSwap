@@ -1,0 +1,81 @@
+<div
+  class="bg-white rounded-2xl p-6 shadow-md flex flex-col items-center text-center relative transition duration-200 ease-in-out hover:-translate-y-1 hover:shadow-xl"
+>
+  <div class="flex flex-col items-center mb-4">
+    <div class="flex flex-col items-center">
+      <img
+        [src]="otherUser.profilePicture || '/images/default-avatar.jpg'"
+        [alt]="otherUser.name"
+        class="w-24 h-24 rounded-full object-cover border-4 border-gray-200 mb-3 bg-gray-100"
+      />
+      <h3 class="text-lg font-bold text-gray-800">
+        {{ otherUser.name }}
+      </h3>
+    </div>
+
+    @if (potentialMatch?.matchScore) {
+      <span
+        class="mt-2 inline-block bg-emerald-500 text-white text-sm font-semibold px-4 py-1 rounded-full"
+      >
+        {{ potentialMatch?.matchScore }}% Match
+      </span>
+    }
+  </div>
+
+  <div class="my-4 w-full">
+    @if (potentialMatch?.isOffered) {
+      <p class="text-gray-700 text-sm">
+        <span class="font-semibold text-emerald-600">Offer:</span>
+        {{ potentialMatch?.name }}
+      </p>
+    } @else {
+      <p class="text-gray-700 text-sm">
+        <span class="font-semibold text-blue-600">Want:</span>
+        {{ potentialMatch?.name }}
+      </p>
+    }
+  </div>
+
+  @if (isPending()) {
+    <div class="flex gap-3 mt-4 justify-center">
+      @if (!isInitiatedByCurrentUser()) {
+        <button
+          class="px-4 py-2 rounded-lg bg-emerald-500 text-white font-semibold text-sm hover:bg-emerald-600"
+          (click)="updateStatus('accepted')"
+        >
+          Accept
+        </button>
+        <button
+          class="px-4 py-2 rounded-lg bg-red-500 text-white font-semibold text-sm hover:bg-red-600"
+          (click)="updateStatus('rejected')"
+        >
+          Reject
+        </button>
+      } @else {
+        <p class="text-gray-500 italic text-sm">
+          Awaiting response from {{ otherUser.name }}.
+        </p>
+      }
+    </div>
+  }
+
+  <div
+    class="absolute top-4 right-4 px-3 py-1 rounded-lg text-xs font-semibold capitalize"
+    [ngClass]="{
+      'bg-emerald-100 text-emerald-800': match?.status === 'accepted',
+      'bg-red-100 text-red-700': match?.status === 'rejected',
+      'bg-amber-100 text-amber-700': match?.status === 'pending'
+    }"
+  >
+    {{ match?.status | titlecase }}
+  </div>
+
+  <div class="mt-4">
+    <button
+      class="px-5 py-2 rounded-lg bg-indigo-600 text-white font-semibold text-sm hover:bg-indigo-700"
+      (click)="onProposeMatch()"
+    >
+      Propose Match
+    </button>
+  </div>
+</div>

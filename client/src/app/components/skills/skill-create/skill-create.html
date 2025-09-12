@@ -1,0 +1,165 @@
+<div class="skill-create-container">
+  <header class="page-header">
+    <button (click)="goBack()" class="back-btn">
+      <i class="fas fa-arrow-left"></i>
+      <span>Back to Skills</span>
+    </button>
+    <div class="header-content">
+      <h1>Create a New Skill</h1>
+      <p>Fill out the details below to add a new skill to the platform.</p>
+    </div>
+  </header>
+
+  <div class="form-card">
+    <form [formGroup]="skillForm" (ngSubmit)="onSubmit()" class="skill-form">
+      <div class="form-section">
+        <h3><i class="fas fa-puzzle-piece"></i> Skill Details</h3>
+
+        <div class="form-group">
+          <label>Skill Type</label>
+          <div class="type-selection" >
+            <label class="type-option" [class.selected]="skillForm.value.isOffered === true">
+              <div class="type-icon" style="background: #667eea;"><i class="fas fa-handshake-angle"></i></div>
+              <div class="type-content">
+                <h4>I want to offer a skill</h4>
+                <p>Share your expertise with others.</p>
+              </div>
+              <div class="type-radio">
+                <input type="radio" [value]="true" formControlName="isOffered">
+              </div>
+            </label>
+            <label class="type-option" [class.selected]="skillForm.value.isOffered === false">
+              <div class="type-icon" style="background: #ed8936;"><i class="fas fa-magnifying-glass"></i></div>
+              <div class="type-content">
+                <h4>I am looking for a skill</h4>
+                <p>Find someone to help you learn.</p>
+              </div>
+              <div class="type-radio">
+                <input type="radio" [value]="false" formControlName="isOffered">
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="title">Skill Title</label>
+          <input type="text" id="title" formControlName="name" placeholder="e.g., Advanced Angular Development" class="form-input" [class.invalid]="name?.invalid && name?.touched">
+          @if (name?.invalid && name?.touched) {
+            <div class="error-message"><i class="fas fa-circle-exclamation"></i> Skill title is required (3–100 characters)</div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" formControlName="description" placeholder="Describe the skill in detail..." class="form-input textarea" [class.invalid]="description?.invalid && description?.touched"></textarea>
+          @if (description?.invalid && description?.touched) {
+            <div class="error-message"><i class="fas fa-circle-exclamation"></i> Description must be 10–1000 characters</div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" formControlName="category" class="form-input" [class.invalid]="category?.invalid && category?.touched">
+            <option value="" disabled>Select Category</option>
+            <option>Technology</option>
+            <option>Arts</option>
+            <option>Music</option>
+            <option>Sports</option>
+            <option>Cooking</option>
+            <option>Languages</option>
+            <option>Business</option>
+            <option>Other</option>
+          </select>
+          @if (category?.invalid && category?.touched) {
+            <div class="error-message"><i class="fas fa-circle-exclamation"></i> Category is required</div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="level">Level</label>
+          <select id="level" formControlName="level" class="form-input" [class.invalid]="level?.invalid && level?.touched">
+            <option value="" disabled>Select Level</option>
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+          @if (level?.invalid && level?.touched) {
+            <div class="error-message"><i class="fas fa-circle-exclamation"></i> Level is required</div>
+          }
+        </div>
+          <div class="form-group">
+            <label for="duration">Duration (in minutes)</label>
+            <input 
+              type="number" 
+              id="duration" 
+              formControlName="duration" 
+              placeholder="e.g., 60" 
+              class="form-input" 
+              [class.invalid]="duration?.invalid && duration?.touched"
+            >
+            @if (duration?.invalid && duration?.touched) {
+              <div class="error-message">
+                <i class="fas fa-circle-exclamation"></i> 
+                Duration is required (minimum 15 minutes)
+              </div>
+            }
+          </div>
+      </div>
+
+      <div class="form-section">
+        <h3><i class="fas fa-circle-info"></i> Additional Information</h3>
+        <div class="form-group">
+          <label for="tags">Tags</label>
+          <input type="text" id="tags" formControlName="tags" placeholder="e.g., Frontend, TypeScript, Web Development" class="form-input">
+        </div>
+        <div class="form-group">
+          <label>Mode of Delivery</label>
+          <div class="format-selection" >
+            
+            <div class="format-option" [class.selected]="mode?.value === 'Online'">
+              <label for="mode-online" class="format-label">
+                <input type="radio" id="mode-online" value="Online" formControlName="mode">
+                <i class="fas fa-wifi"></i>
+                <span>Online</span>
+              </label>
+            </div>
+
+            <div class="format-option" [class.selected]="mode?.value === 'In-person'">
+              <label for="mode-in-person" class="format-label">
+                <input type="radio" id="mode-in-person" value="In-person" formControlName="mode">
+                <i class="fas fa-users"></i>
+                <span>In-person</span>
+              </label>
+            </div>
+
+            <div class="format-option" [class.selected]="mode?.value === 'Both'">
+              <label for="mode-both" class="format-label">
+                <input type="radio" id="mode-both" value="Both" formControlName="mode">
+                <i class="fas fa-arrows-left-right"></i>
+                <span>Both</span>
+              </label>
+            </div>
+
+          </div>
+          @if (mode?.invalid && mode?.touched) {
+            <div class="error-message">
+              <i class="fas fa-circle-exclamation"></i>
+              Please select a delivery mode.
+            </div>
+          }
+        </div>
+      </div>
+
+      @if (error) {
+        <div class="error-message global-error"><i class="fas fa-shield-halved"></i> {{ error }}</div>
+      }
+
+      <div class="form-actions">
+        <button type="button" (click)="goBack()" class="cancel-btn">Cancel</button>
+        <button type="submit" [disabled]="skillForm.invalid" class="submit-btn">
+          <i class="fas fa-check"></i> Save Skill
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

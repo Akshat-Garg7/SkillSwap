@@ -1,0 +1,280 @@
+/* This is standard CSS, converted from the original SCSS. */
+/* You can use this in a regular .css file. */
+
+.skill-create-container {
+  padding: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #f8fafc;
+}
+
+.page-header {
+  margin-bottom: 32px;
+}
+
+.page-header .back-btn {
+  background: none;
+  border: none;
+  color: #667eea;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 8px 0;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.page-header .back-btn:hover {
+  color: #5a67d8;
+}
+
+.page-header .header-content h1 {
+  color: #2d3748;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.page-header .header-content p {
+  color: #718096;
+  font-size: 18px;
+  margin: 0;
+}
+
+.form-card {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f1f5f9;
+}
+
+.skill-form .form-section {
+  margin-bottom: 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.skill-form .form-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 24px;
+  padding-bottom: 0;
+}
+
+.skill-form .form-section h3 {
+  color: #2d3748;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 24px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.skill-form .form-group {
+  margin-bottom: 24px;
+}
+
+.skill-form .form-group label {
+  display: block;
+  color: #2d3748;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.skill-form .form-group .form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #2d3748;
+}
+
+.skill-form .form-group .form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.skill-form .form-group .form-input.invalid {
+  border-color: #e53e3e;
+}
+
+.skill-form .form-group .form-input.textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+}
+
+.skill-form .form-group select.form-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+.skill-form .form-group .error-message {
+  color: #e53e3e;
+  font-size: 14px;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.skill-form .form-group .error-message.global-error {
+  color: #9b2c2c;
+  background: #fed7d7;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  border: 1px solid #fbb6b6;
+}
+
+.skill-form .type-selection {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.skill-form .type-selection .type-option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.skill-form .type-selection .type-option:hover {
+  border-color: #cbd5e0;
+  background: #f7fafc;
+}
+
+.skill-form .type-selection .type-option.selected {
+  border-color: #667eea;
+  background: #f0f4ff;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.skill-form .type-selection .type-option .type-icon {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+}
+
+.skill-form .type-selection .type-option .type-content h4 {
+  color: #2d3748;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.skill-form .type-selection .type-option .type-content p {
+  color: #718096;
+  margin: 0;
+  font-size: 14px;
+}
+
+.skill-form .type-selection .type-option .type-radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.skill-form .form-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  padding-top: 24px;
+  margin-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.skill-form .form-actions .cancel-btn,
+.skill-form .form-actions .submit-btn {
+  padding: 12px 24px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.skill-form .form-actions .cancel-btn {
+  background: #f7fafc;
+  color: #4a5568;
+}
+
+.skill-form .form-actions .cancel-btn:hover:not(:disabled) {
+  background: #edf2f7;
+}
+
+.skill-form .form-actions .submit-btn {
+  background: #667eea;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skill-form .form-actions .submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.skill-form .form-actions .cancel-btn:disabled,
+.skill-form .form-actions .submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Media query for responsive design */
+@media (max-width: 768px) {
+  .skill-create-container {
+    padding: 16px;
+  }
+  
+  .form-card {
+    padding: 20px;
+  }
+  
+  .skill-form .type-selection {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-form .form-actions {
+    flex-direction: column;
+  }
+
+  .skill-form .form-actions .cancel-btn,
+  .skill-form .form-actions .submit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

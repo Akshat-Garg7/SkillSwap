@@ -1,0 +1,98 @@
+<div class="max-w-6xl mx-auto p-8 bg-gray-50 rounded-xl shadow-lg">
+  <!-- Heading -->
+  <h2 class="text-center text-2xl font-bold text-gray-800 mb-2">
+    Your Skill Swaps
+  </h2>
+  <p class="text-center text-gray-500 mb-8">
+    Manage your pending, accepted, and completed skill exchange requests.
+  </p>
+
+  <!-- Filter Controls -->
+  <div class="flex justify-center flex-wrap gap-3 mb-8">
+  <button
+    (click)="onFilterChange('all')"
+    [ngClass]="{
+      'bg-indigo-600 text-white': activeFilter === 'all',
+      'bg-gray-200 text-gray-600': activeFilter !== 'all'
+    }"
+    class="px-5 py-2 rounded-full font-semibold transition-colors duration-200 hover:bg-gray-300"
+  >
+    All
+  </button>
+
+  <button
+    (click)="onFilterChange('pending')"
+    [ngClass]="{
+      'bg-indigo-600 text-white': activeFilter === 'pending',
+      'bg-gray-200 text-gray-600': activeFilter !== 'pending'
+    }"
+    class="px-5 py-2 rounded-full font-semibold transition-colors duration-200 hover:bg-gray-300"
+  >
+    Pending
+  </button>
+
+  <button
+    (click)="onFilterChange('accepted')"
+    [ngClass]="{
+      'bg-indigo-600 text-white': activeFilter === 'accepted',
+      'bg-gray-200 text-gray-600': activeFilter !== 'accepted'
+    }"
+    class="px-5 py-2 rounded-full font-semibold transition-colors duration-200 hover:bg-gray-300"
+  >
+    Accepted
+  </button>
+
+  <button
+    (click)="onFilterChange('completed')"
+    [ngClass]="{
+      'bg-indigo-600 text-white': activeFilter === 'completed',
+      'bg-gray-200 text-gray-600': activeFilter !== 'completed'
+    }"
+    class="px-5 py-2 rounded-full font-semibold transition-colors duration-200 hover:bg-gray-300"
+  >
+    Completed
+  </button>
+
+  <button
+    (click)="onFilterChange('rejected')"
+    [ngClass]="{
+      'bg-indigo-600 text-white': activeFilter === 'rejected',
+      'bg-gray-200 text-gray-600': activeFilter !== 'rejected'
+    }"
+    class="px-5 py-2 rounded-full font-semibold transition-colors duration-200 hover:bg-gray-300"
+  >
+    Rejected
+  </button>
+</div>
+
+
+  <!-- States -->
+  @if (loading) {
+    <div class="text-center py-8 text-gray-600 italic">
+      Loading your matches...
+    </div>
+  } @else if (error) {
+    <div class="text-center py-8 text-red-500 font-medium">
+      {{ error }}
+    </div>
+  } @else if (filteredMatches.length === 0) {
+    <div class="text-center py-8 text-gray-500 italic">
+      <p>You have no matches in this category.</p>
+      <p>
+        <a routerLink="/matches/find" class="text-indigo-600 font-semibold hover:underline">
+          Find new matches!
+        </a>
+      </p>
+    </div>
+  } @else {
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (match of filteredMatches; track match._id) {
+        <app-match-card
+          [match]="match"
+          [currentUserId]="currentUser?._id || ''"
+          (statusUpdated)="onStatusUpdated()"
+        ></app-match-card>
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,74 @@
+<mat-card class="profile-container max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
+
+  @if (user$ | async; as user) {
+
+    <!-- Profile header -->
+    @if (user) {
+      <div class="profile-header flex items-center space-x-6">
+        <img
+          [src]="user.profilePicture || '/images/default-avatar.jpg'"
+          alt="Profile Picture"
+          class="profile-picture w-20 h-20 rounded-full border-2 border-gray-300"
+        />
+        <div class="profile-info flex flex-col">
+          <h1 class="text-2xl font-semibold text-gray-800">{{ user.name }}</h1>
+          <p class="location text-gray-600">{{ user.location || 'Location not set' }}</p>
+          <p class="email text-gray-600">{{ user.email }}</p>
+          <a
+            routerLink="/profile/edit"
+            class="edit-profile-btn mt-2 inline-block text-blue-500 hover:text-blue-700"
+          >
+            Edit Profile
+          </a>
+        </div>
+      </div>
+
+      <!-- Bio section -->
+      <div class="profile-body mt-6">
+        <div class="bio mb-6">
+          <h3 class="text-xl font-medium text-gray-800">About Me</h3>
+          <p class="text-gray-700">{{ user.bio }}</p>
+        </div>
+
+        <!-- Offered Skills -->
+        <div class="skills-section mb-6">
+          <h3 class="text-xl font-medium text-gray-800">Skills I Can Teach</h3>
+          @if ((user?.skillsOffered ?? []).length > 0) {
+            <div class="skills-grid grid grid-cols-2 gap-4">
+              @for (skill of user?.skillsOffered ?? []; track skill.name) {
+                <mat-chip>{{ skill.name }}</mat-chip>
+              }
+            </div>
+          } @else {
+            <p class="text-gray-500">No offered skills yet.</p>
+          }
+        </div>
+
+        <!-- Requested Skills -->
+        <div class="skills-section mb-6">
+          <h3 class="text-xl font-medium text-gray-800">Skills I Want to Learn</h3>
+          @if ((user?.skillsWanted ?? []).length > 0) {
+            <div class="skills-grid grid grid-cols-2 gap-4">
+              @for (skill of user?.skillsWanted ?? []; track skill.name) {
+                <mat-chip color="primary" selected>{{ skill.name }}</mat-chip>
+              }
+            </div>
+          } @else {
+            <p class="text-gray-500">No requested skills yet.</p>
+          }
+        </div>
+      </div>
+    } @else {
+      <!-- Error State -->
+      <p class="text-center text-red-500">Could not load profile. Please try again later.</p>
+    }
+
+  } @else {
+    <!-- Loading State -->
+    <div class="flex flex-col items-center space-y-3">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p class="text-center text-gray-600">Loading profile...</p>
+    </div>
+  }
+
+</mat-card>
