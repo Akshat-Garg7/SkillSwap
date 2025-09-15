@@ -1,4 +1,11 @@
 {
+  "builds": [
+    {
+      "src": "client/angular.json",
+      "use": "@vercel/angular"
+    }
+  ],
+  "outputDirectory": "client/dist/client",
   "rewrites": [
     {
       "source": "/(.*)",
